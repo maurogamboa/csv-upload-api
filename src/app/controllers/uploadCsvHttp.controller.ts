@@ -3,20 +3,7 @@ import formidable from "formidable";
 import parseCSV from "../../core/useCases/parseCSV";
 import { appRepository } from "../server";
 import fs from 'fs';
-import { ColumnLayout } from "../../core/entities/ColumnLayout";
-
-const ColumnLayout: ColumnLayout = {
-  UUID: '',
-  VIN: '',
-  Make: '',
-  Model: '',
-  Mileage: '',
-  Year: '',
-  Price: '',
-  ZipCode: '',
-  CreateDate: '',
-  UpdateDate: '',
-}
+import { appColumnLayout } from "../config/column-layout";
 
 export default async function uploadCsvController(
   request: Request,
@@ -41,7 +28,7 @@ export default async function uploadCsvController(
       } 
         
       //call function parseCsv
-      parseCSV(appRepository(), ColumnLayout)(filePath, provider)
+      parseCSV(appRepository(), appColumnLayout)(filePath, provider)
         .then((value) => response.status(200).json({result: "ok"}))
         .catch((err) => response.status(400).json({error: err}))
         .finally(() => {
