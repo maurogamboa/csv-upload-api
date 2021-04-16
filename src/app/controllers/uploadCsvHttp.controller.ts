@@ -35,7 +35,7 @@ export default async function uploadCsvController(
         response.status(400).json({error: "error processing the file"})
       } else {
         //call function parseCsv
-        parseCSV(appRepository(), ColumnLayout)(filePath)
+        parseCSV(appRepository(), ColumnLayout)(filePath, 'fields.provider')
           .then((value) => response.status(200).json({result: "ok"}))
           .catch((err) => response.status(400).json({error: err}))
           .finally(() => {

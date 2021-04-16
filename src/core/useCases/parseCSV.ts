@@ -3,7 +3,7 @@ import Repository from "../repositories/repository";
 import csvParser from "csv-parser";
 import fs from 'fs';
 
-const parseCSV = (repo: Repository, layout: ColumnLayout) => async (file: string): Promise<void> => {
+const parseCSV = (repo: Repository, layout: ColumnLayout) => async (file: string, provider: string): Promise<void> => {
 
   return new Promise((resolve, reject) => {
     const results: ColumnLayout[] = [];
@@ -21,7 +21,7 @@ const parseCSV = (repo: Repository, layout: ColumnLayout) => async (file: string
     })
     .on('end', async () => {
       try { //save into repository
-        await repo.insertData(results);  
+        await repo.insertData(results, provider);  
         resolve();
       } catch (error) {
         reject(error)
