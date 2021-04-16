@@ -7,7 +7,15 @@ import { ColumnLayout } from "../../core/entities/ColumnLayout";
 
 const ColumnLayout: ColumnLayout = {
   UUID: '',
-  MILEAGE: ''
+  VIN: '',
+  Make: '',
+  Model: '',
+  Mileage: '',
+  Year: '',
+  Price: '',
+  ZipCode: '',
+  CreateDate: '',
+  UpdateDate: '',
 }
 
 export default async function uploadCsvController(

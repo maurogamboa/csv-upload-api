@@ -12,8 +12,12 @@ const parseCSV = (repo: Repository, layout: ColumnLayout) => async (file: string
     fs.createReadStream(file)
     .pipe(csvParser())
     .on('data', (data) => {
-      //TODO - map to layout
-      results.push(data)
+      //mapping to layout
+      const newLayout = {...layout}
+      for (let key in newLayout) {
+        newLayout[key] = data[key] ?? '';
+      }
+      results.push(newLayout)
     })
     .on('end', async () => {
       try { //save into repository
