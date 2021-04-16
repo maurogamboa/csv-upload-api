@@ -1,17 +1,23 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import config from "./config/config";
+import { publicRoutes } from "./routes/public.routes";
   
-const app = express();
-const PORT = config.server.port;
+export default function() {
+  
+  const app = express();
+  const PORT = config.server.port;
+  
+  app.use(express.urlencoded({extended: false}));
+  app.use(express.json());
+  
+  //routes
+  app.use(publicRoutes);
 
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
+  //Start server
+  app.listen(PORT, () => {
+    console.log(`⚡️[server]: Server is running at PORT: ${PORT}`);
+  });
 
-app.get("/", (req: Request, res: Response) => {});
-
-//Start server
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at PORT: ${PORT}`);
-});
-
-export default app;
+  return app;
+ 
+}
