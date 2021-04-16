@@ -1,3 +1,5 @@
+import { ColumnLayout } from "../entities/ColumnLayout";
+
 export default interface Repository {
-  insertData(): Promise<void>;
+  insertData(data: ColumnLayout[]): Promise<void>;
 }
