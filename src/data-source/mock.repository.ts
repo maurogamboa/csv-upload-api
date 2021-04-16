@@ -6,6 +6,7 @@ export class MockRepository implements Repository {
   insertData(data: ColumnLayout[]): Promise<void> {
     this.records.push(...data);
     return Promise.resolve();
+    
   }
   
 
